@@ -1,10 +1,10 @@
 const fr_si = document.getElementById("input-fr-si")
 const fr_no = document.getElementById("input-fr-no")
 const section_fr = document.querySelector(".section-fr")
-const section_perso = document.querySelector(".container-personalized")
+const section_perso = document.querySelector(".contenedor-personalized")
 const input_cal = document.getElementById("input-cal")
 
-const calculate = () =>{
+const calculo = () =>{
     const input_kg = +(document.getElementById("input-kg")).value
     const input_nw = +(document.getElementById("input-nw")).value
     const input_mats = document.getElementById("input-mats").value
@@ -64,31 +64,31 @@ const calculate = () =>{
     let ffd = ud * normal
     let fuerzaNeta = fx - ffd
     if(ffe > Math.abs(fx)){
-        let resNAc = 'Fuerza Aplicada: ' + input_nw + ' Newton\nFuerza de Friccion Estatica: ' + ffe + ' Newton\nEste objeto no se mueve porque la friccion entre los cuerpos es muy grande'
-        response(resNAc)
+        let resNAc = 'Fuerza Aplicada: ' + input_nw + ' Newton\nFuerza de Friccion Estatica: ' + ffe + ' Newton\n El objeto no se mueve porque la friccion es muy grande'
+        respuesta(resNAc)
         console.log(resNAc)
         a = 0
     } else if (ffe < Math.abs(fx)){
         a = fuerzaNeta / input_kg
         let resAc = 'El objeto tiene una aceleracion de ' + a + ' m/s^2 \n(Valor positivo: movimiento -> Valor negativo: <-)'
-        response(resAc)
+        respuesta(resAc)
         console.log(resAc)
     }
 }
 
-const response = (res) => {
-    clearResponse();
-    let container_res = document.querySelector(".container-res")
-    let responseDiv = document.createElement("div");
-    responseDiv.innerHTML = `<h4>Respuesta</h4>
+const respuesta = (res) => {
+    clearRespuesta();
+    let contenedor_res = document.querySelector(".contenedor-res")
+    let respuestaDiv = document.createElement("div");
+    respuestaDiv.innerHTML = `<h4>Respuesta</h4>
                         <p>${res}</p>`;
-    container_res.appendChild(responseDiv);
+    contenedor_res.appendChild(respuestaDiv);
 }
 
-const clearResponse = () =>{
-    const responses = document.querySelector("#idResponse");
-    while (responses.firstChild) {
-        responses.removeChild(responses.firstChild);
+const clearRespuesta = () =>{
+    const respuesta = document.querySelector("#idRespuesta");
+    while (respuesta.firstChild) {
+        respuesta.removeChild(respuesta.firstChild);
     }
 }
 
@@ -121,7 +121,5 @@ fr_no.addEventListener("click", (e)=>{
 
 input_cal.addEventListener("click", (e) =>{
     e.preventDefault();
-    calculate();
+    calculo();
 })
-
-

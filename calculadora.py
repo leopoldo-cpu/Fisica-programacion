@@ -1,51 +1,56 @@
-import math
-case = True
-array = [[],[]]
-while case == True:
-    m = float(input('Ingrese la masa del cuerpo (Kilogramos) '))
-    f = float(input('Ingrese la fuerza aplicada al cuerpo (Newton)(Ingresar valor negativo (-) para mover el objeto en la direccion opuesta) '))
-    g = 9.8
-    fx = f
-    pesoy = m * g
-    planoInc = input('¿El plano esta inclinado? (s/n) ').lower()
-    if planoInc == 's':
-        global inc
-        inc = int(input('¿Cuantos grados(°) esta inclinado el plano? '))
-        while inc > 90 or inc < 0:
-            print('No es posible, ingrese otro valor ')
-            inc = int(input('¿Cuantos grados(°) esta inclinado el plano? '))
-            fx = fx + m * g * math.sin(inc * math.pi / 180)
-            pesoy = m * g * math.cos(inc * math.pi / 180)
-    if input('¿Hay friccion? (s/n) ').lower() == 's':
-        material = input('¿Que materiales componen a los cuerpos?\na. Madera sobre madera\nb. Acero sobre hielo\nc. Teflón sobre teflón\nd. Caucho sobre cemento seco\ne. Vidrio sobre vidrio\nf. Esquí sobre nieve\ng. Madera sobre cuero\nh. Aluminio sobre acero\ni. Articulaciones humanas\nj. Personalizado\n')
-        if material == 'a': ue = 0.5; ud = 0.3
-        elif material == 'b': ue = 0.03; ud = 0.02
-        elif material == 'c': ue = 0.04; ud = 0.04
-        elif material == 'd': ue = 1; ud = 0.8
-        elif material == 'e': ue = 0.9; ud = 0.4
-        elif material == 'f': ue = 0.1; ud = 0.05
-        elif material == 'g': ue = 0.5; ud = 0.4
-        elif material == 'h': ue = 0.61; ud = 0.47
-        elif material == 'i': ue = 0.02; ud = 0.003
-        elif material == 'j':
-            ue = float(input('Coeficiente de friccion estatico: '))
-            ud = float(input('Coeficiente de friccion dinamico: '))
-        ffe = ue * pesoy
-        ffd = ud * pesoy
-        fuerzaNeta = fx - ffd
-        if ffe > abs(fx):
-            print('Fuerza Aplicada:', f, 'Newton\nFuerza de Friccion Estatica:', ffe, 'Newton\nEste objeto no se mueve porque la friccion entre los cuerpos es muy grande')
-            a = 0
-            print(fx)
-            print(pesoy)
-            exit()
-        else:
-          a = fuerzaNeta / m
-          print('El objeto tiene una aceleracion de', a, 'm/s^2 (Valor positivo: movimiento -> Valor negativo: <-)')
-    else:
-        a = fx / m
-        print('El objeto tiene una aceleracion de', a, 'm/s^2 (Valor positivo: movimiento -> Valor negativo: <-)')
-        if a == 0:
-            print('Este objeto no se mueve')
-    if input('¿Desea evaluar otro caso? (s/n) ') == 's': case = True
-    else: case = False
+import matplotlib.pyplot as plt
+
+repeticion=int(input("Cuantas veces queres que se repita el codigo: "))
+lista=[]
+x=[]
+y=[]
+for i in range(0,repeticion):
+    def variables():
+        vel= float(input("ingrese la velocidad en m/s: "))
+        while vel<0:
+          vel= float(input(" negativo no ingrese la velocidad devuelta en m/s y positivo: "))
+          if vel>0:
+            break
+        cabal=float(input("ingrese la distancia del caballo hasta el auto(en metros): "))
+        while cabal<0:
+          cabal=float(input(" negativo no ingrese la distancia del caballo hasta el auto devuelta (en metros y positivo): "))
+          if cabal>0:
+            break
+        fren= float(input("ingrese a que velocidad el auto desacelera(expresalo en negativo): "))
+        return calculos(vel, cabal, fren) # es una palabra reservada de python que marca el final de la funcion y envia los rsultados a la otra funcion 
+    def calculos(vel, cabal, fren):
+        while fren>0:
+            fren= float(input("no se puede la desaceleracion en numero positivo ponelo en negativo: "))
+            if fren<0:
+                break
+        calc= 0-vel
+        tie= calc/fren
+        dist= 0+vel*tie+0.5*fren*(tie*tie)
+        if dist>cabal:
+            print("Te comiste a un caballo")
+            c = vel + (1/2)*(0-vel)
+            c2 = cabal/c
+            acel = (0-vel)/c2
+            print("nececitabas frenar a ", acel, "m/s2 para no chocarte")
+            print("lo chocaste en ",tie, "segundos")
+            lista.append(acel)
+            lista.append(tie)
+
+        elif dist<=cabal:
+            dist2=cabal-dist
+            print("te quedaste a",dist2, "metros de chocar al caballo")
+            print("Frenaste en ",tie, "segundos")
+            lista.append(dist2)
+            lista.append(tie)
+        y.append(tie)
+        x.append(dist)
+    variables()
+print("Los resultados fueron",lista)
+width=0.1
+plt.bar(y,x, width=width, color="red") # solo la barra se va a mover en Y
+plt.scatter(y,x, color="blue")
+plt.plot(y,x, color="green") # la barra se puede pocisionar 
+plt.ylabel("Distancia")
+plt.xlabel("Tiempo")
+plt.title("Distancia sobre tiempo")
+plt.show()
