@@ -1,8 +1,3 @@
-body{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-
 .contenedor-header h1{
     padding: 20px;
 }
@@ -27,6 +22,9 @@ body{
     padding: 10px;
     border-radius: 15px;
     margin: 8px;
+}
+.cal{
+    width: fit-content;
 }
 
 .contenedor-footer{
