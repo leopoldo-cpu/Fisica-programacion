@@ -62,7 +62,7 @@ const calculo = () =>{      // funcion para calcular todo,
         a = 0
     } else if (ffe < Math.abs(fx)){ // si la fuersa de friccion estatiac es mayor a absoluto de fx
         a = fuerzaNeta / input_kg
-        let resAc = 'El objeto tiene una aceleracion de ' + a + ' m/s^2 \n(Valor positivo: movimiento -> Valor negativo: <-)'
+        let resAc = 'El objeto tiene una aceleracion de ' + a + ' m/s²'
         respuesta(resAc)
         console.log(resAc)
     }
